@@ -13,15 +13,15 @@ Use only when the project runs in Docker Sandboxes; confirm supported CLI comman
 - No secrets in `.env`, Docker image layers, shell history, logs, task comments, or repository files. Never print credential values.
 
 ## Declarative tooling
-- Keep a version-controlled `Dockerfile.sandbox` (and any relevant sandbox/kit config) as the canonical environment recipe.
-- After installing/removing a persistent system package, global CLI, or binary, adjust the recipe in the same working increment; keep it grouped, minimal, and reproducible.
+- Keep a version-controlled `sbxenv.yaml` and local sandbox kits (e.g., `kits/<name>/<name>.yaml` and `<name>.dockerfile`) as the canonical environment recipe.
+- After installing/removing a persistent system package, global CLI, or binary, adjust the kit recipe and `sbxenv.yaml` in the same working increment; keep it grouped, minimal, and reproducible.
 - Prefer pinned, verified package/tool versions and project-scoped dependency lockfiles.
 - Validate a clean build at suitable checkpoints, especially before calling environment work Done.
 - Baked agent instructions may be provided through the template or an agent kit; repository instructions remain version-controlled and accessible.
 
 ## Safe rebuild
-- Confirm the installed `sbx` syntax, available templates, required credentials, network policy, and workspace mounts.
-- Build the image from `Dockerfile.sandbox`, load/register the image as required by the installed CLI, and create a **new** test sandbox from it.
+- Confirm the installed `sbx` syntax, available kits, required credentials, network policy, and workspace mounts.
+- Recreate or validate the sandbox via `sbx env` (`cp sbxenv.yaml ../sbxenv.yaml && cd .. && (sbx env rm || true) && sbx env run`), which builds local source-form kits automatically via `sbx-kit-builder`.
 - Validate required tools, tests, network restrictions, and secret isolation in the fresh sandbox.
 - Only remove an existing sandbox after confirming no unpersisted code, logs, local images, data, or session state will be lost. Do not treat a template as backup of mounted volumes or Docker storage.
 
