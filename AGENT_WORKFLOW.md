@@ -25,10 +25,9 @@ This is an iterative, Scrum-inspired workflow, **not** a mandatory sprint/ceremo
 - Assign each worker an issue with explicit handoff artifacts. Avoid concurrent modifications to shared schemas, build files, or core interfaces.
 - After merge, rerun tests, check interface compatibility and reconcile issue states. A passing isolated branch is not proof of a passing integration.
 
-## 4. Task tracker policy (Linear preferred)
-- Treat Linear as the task board if configured. Use a single project, consistent issue identifiers, explicit blocker relationships, and status mapping to the available workspace workflow.
+## 4. Task tracker policy
+- Treat `TASKS.md` (or the configured open-source issue tracker) as the task board. Use a single backlog, consistent issue identifiers, explicit blocker relationships, and clear status progression.
 - Do not use a task's status as a substitute for evidence. Attach relevant commits/PRs, test commands/results, and review notes.
-- If tracking integration is missing, work from `TASKS.md` and record pending tracker changes; reconcile when connectivity resumes.
 - The authoritative product contract remains the version-controlled `SPEC.md`, not mutable issue descriptions.
 
 ## 5. Definition of Ready / Done
@@ -37,8 +36,8 @@ This is an iterative, Scrum-inspired workflow, **not** a mandatory sprint/ceremo
 **Done:** implementation satisfies requirements; relevant tests pass after the final change; review findings addressed; documentation/migrations updated as needed; working commits/PR linked; integration verified; tracker reflects actual results.
 
 ## 6. Worktree-based parallel delivery
-- Lead agent refines Linear issues and their dependencies, then grants exclusive issue/worktree ownership.
-- Use issue-labelled branches (e.g. `feat/ENG-123-event-replay`) and separate worktrees for writing agents.
+- Lead agent refines tasks and their dependencies, then grants exclusive issue/worktree ownership.
+- Use issue-labelled branches (e.g. `feat/TASK-003-event-replay`) and separate worktrees for writing agents.
 - Each agent validates and commits independently on its branch; reviewers inspect the committed diff, ideally without modifying it.
 - Integrate only after review and passing CI; resolve cross-branch incompatibilities and rerun affected tests before marking issues Done.
-- Track worktree/branch/PR ownership in Linear when available. Never assume Git worktree isolation also supplies OS-level or secret isolation.
+- Track worktree/branch/PR ownership in `TASKS.md`. Never assume Git worktree isolation also supplies OS-level or secret isolation.

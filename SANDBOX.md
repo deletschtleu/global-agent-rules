@@ -8,7 +8,7 @@ Use only when the project runs in Docker Sandboxes; confirm supported CLI comman
 - Restrict outbound network access to required services and package registries. Record all allowlist decisions. Do not weaken policy merely to make builds work.
 
 ## Credentials
-- Real API keys, GitHub/Linear tokens, passwords, and PATs must remain host-controlled. Use documented `sbx secret` integration or an equivalently scoped host-side secret broker.
+- Real API keys, GitHub tokens, passwords, and PATs must remain host-controlled. Use documented `sbx secret` integration or an equivalently scoped host-side secret broker.
 - Sandbox-visible placeholders/proxy substitution are an implementation detail of supported service integrations, not a guarantee for arbitrary credentials or domains.
 - No secrets in `.env`, Docker image layers, shell history, logs, task comments, or repository files. Never print credential values.
 

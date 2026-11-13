@@ -27,11 +27,11 @@ Applies to every software repository unless a more restrictive project policy is
 - Keep branch/PR scope small; after merging rerun affected verification. Include issue ID in commits/PRs where practical.
 
 ## Issue tracking
-- Use the project's configured tracker (prefer Linear if configured). Each issue must state outcome, requirement links, acceptance criteria, dependencies, test plan, and Definition of Done.
+- Use a version-controlled `TASKS.md` (or the project's configured open-source tracker). Each issue must state outcome, requirement links, acceptance criteria, dependencies, test plan, and Definition of Done.
 - Proposed states: Backlog → Refinement → Ready → In Progress → Review → Verified → Done; Blocked is an explicit exception.
 - The agent may create/refine/update issues when authorized. Only mark Done after tests and review; link commits/PR and evidence. Never report a tracker update as successful without confirmation.
 - Parallelize only unblocked, non-overlapping issues with agreed interfaces. Integrate and retest before marking Done.
-- If Linear is unavailable, use a version-controlled `TASKS.md` rather than dropping task state; reconcile on reconnection, never create duplicate issues blindly.
+- Do not maintain two conflicting backlogs; never create duplicate issues blindly.
 
 ## Sandbox security and reproducibility
 - Follow `SANDBOX.md` where Docker Sandboxes (`sbx`) are in use.
