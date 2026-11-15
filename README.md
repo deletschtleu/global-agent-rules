@@ -38,15 +38,15 @@ git clone https://github.com/deletschtleu/global-agent-rules.git ~/.config/globa
 
 Check your installed agent tool's documentation for its exact global instruction path, then wire the files so the agent can read all three documents:
 
-- **Tools reading a global `AGENTS.md` directory (e.g., Codex CLI, Antigravity, Gemini CLI):**
-  Symlink `AGENTS.md`, `AGENT_WORKFLOW.md`, and `SANDBOX.md` into the directory your agent scans for global instructions (for example `~/` or the tool's config directory—verify with your installed CLI):
+- **Tools reading a global `AGENTS.md` directory:**
+  Symlink `AGENTS.md`, `AGENT_WORKFLOW.md`, and `SANDBOX.md` into the directory your agent scans for global instructions (for example `~/` or your tool's global config directory—verify with your installed CLI):
   ```sh
   ln -s ~/.config/global-agent-rules/AGENTS.md ~/AGENTS.md
   ln -s ~/.config/global-agent-rules/AGENT_WORKFLOW.md ~/AGENT_WORKFLOW.md
   ln -s ~/.config/global-agent-rules/SANDBOX.md ~/SANDBOX.md
   ```
-- **Claude Code (`~/.claude/CLAUDE.md`):**
-  Reference the global files from `~/.claude/CLAUDE.md` so Claude loads `AGENTS.md` at startup and knows the exact path to `AGENT_WORKFLOW.md` and `SANDBOX.md`:
+- **Tools using a global instruction/import file (e.g., `~/.claude/CLAUDE.md`):**
+  Reference the global files from the tool's global entrypoint so it loads `AGENTS.md` at startup and knows the exact path to `AGENT_WORKFLOW.md` and `SANDBOX.md`:
   ```markdown
   @~/.config/global-agent-rules/AGENTS.md
 

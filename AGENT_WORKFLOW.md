@@ -31,7 +31,7 @@ Correctness, security, scope discipline, and honest verification remain strict r
 ## 3. Provider-Agnostic Task Tracking
 
 - Support the project's configured tracker—such as **Jira, Linear, GitHub Issues, a version-controlled `TASKS.md`**, or another agreed system.
-- Maintain **one authoritative backlog**. Never create a competing task file or duplicate issues.
+- Maintain **one authoritative backlog**. Never create a competing task file or duplicate issues. Product requirements remain authoritative in the project's agreed specification or documentation; tracker descriptions must not silently redefine them.
 - Trivial changes do not require a tracked issue unless project policy says otherwise. For meaningful tracked work, record the expected outcome, acceptance criteria, dependencies, verification evidence, and commit/PR references.
 - Example lifecycle states (`Backlog → Refinement → Ready → In Progress → Review → Verified → Done`, plus `Blocked`) illustrate flow; map work to the configured tracker's native statuses rather than forcing state names.
 - If tracking is warranted for non-trivial work and no tracker is configured or documented, **ask the user on demand** and record the choice for future sessions—never run an obligatory startup questionnaire.
@@ -71,6 +71,6 @@ Each worker agent completing or pausing a task must provide a concise handoff co
 5. **Assumptions made, unresolved risks, and integration notes**
 
 ### Integration and Cleanup
-- The coordinating (lead) agent reviews worker diffs, integrates branches according to repository policy (via PRs/CI when configured, or local branch integration when appropriate—do not invent protected-branch rules or mandate PR ceremony for every trivial local change), and resolves cross-branch interactions.
+- The coordinating (lead) agent owns conflict detection, reviews worker diffs, integrates branches according to repository policy (via PRs/CI when configured, or local branch integration when appropriate—do not invent protected-branch rules or mandate PR ceremony for every trivial local change), resolves cross-branch interactions, and performs final tracker updates.
 - **Always rerun affected tests and checks on the integrated result**; passing branches in isolation do not prove a passing integration.
 - Remove a temporary worktree only after its commits are verified in the target branch and you have confirmed no uncommitted or unbacked-up work remains.

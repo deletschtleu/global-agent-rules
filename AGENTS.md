@@ -9,7 +9,7 @@ Default operating principles for coding agents across software repositories. **B
 4. **Global instructions** (`AGENTS.md`, `AGENT_WORKFLOW.md`, `SANDBOX.md`) provide baseline defaults.
 
 - Surface instruction conflicts explicitly instead of guessing. Markdown files never override platform-enforced permissions.
-- `AGENT_WORKFLOW.md` and `SANDBOX.md` live in the global rules installation directory (or a mounted global-rules workspace), not necessarily in the current project root. Load them on demand from their installed global path:
+- `AGENT_WORKFLOW.md` and `SANDBOX.md` live alongside this global `AGENTS.md` in the global rules installation directory (e.g., `~/.config/global-agent-rules/` or a mounted `global-agent-rules` workspace—resolve symlinks if needed), **not** necessarily in the active project root. Load them on demand from that global directory:
   - Read `AGENT_WORKFLOW.md` when planning non-trivial work, updating task trackers, recording project decisions, or coordinating multiple agents.
   - Read `SANDBOX.md` when working inside or modifying Docker Sandboxes (`sbx`) or containerized environments.
 
@@ -24,7 +24,7 @@ Do not turn startup into a rigid questionnaire or checklist for small requests. 
 ## 3. Scope Discipline and Engineering Judgment
 - Implement the requested outcome with the smallest reasonable, coherent change.
 - Preserve existing interfaces, contracts, and project conventions unless the task requires changing them.
-- Avoid unrelated refactorings, speculative abstractions, extra dependencies, or unrequested infrastructure.
+- Prefer existing project conventions and working solutions over introducing new mechanisms, speculative abstractions, extra dependencies, unrelated refactorings, or unrequested infrastructure.
 - Record unrelated defects or improvements as follow-up candidates rather than silently expanding scope.
 
 ## 4. Autonomy and Escalation Boundaries
@@ -46,12 +46,12 @@ Do not turn startup into a rigid questionnaire or checklist for small requests. 
 
 ## 6. Git: Frequent, Verified, Atomic Commits
 - **Commit early and often whenever a meaningful, independently working increment is complete.** Prefer multiple small, logical commits per task over a single giant end-of-task commit.
-- Each commit must have a clear imperative message, include the code/tests/config needed for that increment, and pass relevant fast build and test checks. Keep intermediate commits internally consistent (using feature flags or isolated components when needed) and keep failing TDD `RED` states uncommitted on shared history.
+- Each commit must have a clear imperative message, include the code/tests/config needed for that increment, and pass relevant fast build and test checks. Investigate failures instead of committing known broken changes as working; keep intermediate commits internally consistent (using feature flags or isolated components when needed) and keep failing TDD `RED` states uncommitted on shared history.
 - Before committing, inspect `git diff` and staged files to ensure no secrets, credentials, or stray build artifacts are included.
 - Never bypass tests/hooks, force-push, rewrite shared history, or overwrite user changes without explicit permission. Follow repository branch/PR conventions.
 
 ## 7. Risk-Based Verification and Honest Evidence
-- Scale verification to risk: run fast relevant checks per commit, and run affected integration, contract, static, or security checks after the final edit or merge.
+- Scale verification to risk: run fast relevant checks per commit, and rerun affected integration, contract, static, or security checks after the final edit or merge (a passing branch in isolation does not prove a passing integration).
 - **Report verification outcomes honestly:** distinguish **passed**, **failed**, **skipped**, **blocked**, and **unavailable**, citing the exact commands run. Never claim a test, build, review, tracker update, or integration succeeded without evidence.
 - If no test suite exists or verification is blocked by missing infrastructure, explain that clearly; never equate "not run" with verified or mark blocked work as Done.
 - Finish by summarizing changes, commit references, verification commands/results, notable assumptions or recorded decisions, and remaining risks or follow-ups.
